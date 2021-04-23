@@ -1,0 +1,27 @@
+{
+    "name": "bart/human",
+    "type": "project",
+    "description": "Human body representation in PHP programming language",
+    "authors": [
+        {
+            "name": "Bartosz Tomczak",
+            "email": "bosslog@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "7.4.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Human\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Human\\Tests\\": "tests/"
+        }
+    }
+}
