@@ -1,6 +1,6 @@
 <?php
 
-namespace Human\Body\Fluid;
+namespace Human\Body\System\Circulatory;
 
 use Human\Body\FluidInterface;
 
@@ -27,5 +27,10 @@ class Blood implements FluidInterface
         $this->volume -= $volume;
 
         return new Blood($volume);
+    }
+
+    public function add(FluidInterface $fluid): void
+    {
+        $this->volume += $fluid->getVolume();
     }
 }

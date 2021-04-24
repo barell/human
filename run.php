@@ -14,26 +14,23 @@ function wait(int $milliseconds)
 
 println('Press Ctrl + C to exit');
 
-$blood = new \Human\Body\Fluid\Blood(50);
-$vessel = new \Human\Body\Channel\Vessel(50);
+use Human\Body\System\Circulatory\Blood;
+use Human\Body\System\Circulatory\Vessel;
+use Human\Body\System\Circulatory\Heart;
+
+$blood = new Blood(50);
+$vessel = new Vessel(50);
 $vessel->fillWith($blood);
-$heart = new \Human\Body\Organ\Heart(10);
+$heart = new Heart(10);
+$heart->addEnergy(120 * 10); // add energy for full 10 beats
 $heart->setInput($vessel);
 
 while (true) {
-    if ($vessel->getFluid() !== null) {
-        println(\sprintf('There is %d blood in vessel', $vessel->getFluid()->getVolume()));
-    } else {
-        println('No more blood in vessel');
-    }
-
     $heart->expand();
-    println('Heart expanded ' . $heart->getCapacity());
-    wait(500);
+    echo str_pad(str_repeat('|', $heart->getCapacity()), 30) . "\r";
+    wait(250);
 
     $heart->contract();
-    println('Heart contracted');
-    wait(1000);
-
-    println('---------------------');
+    echo str_pad(str_repeat('|', $heart->getCapacity()) , 30). "\r";
+    wait(600);
 }

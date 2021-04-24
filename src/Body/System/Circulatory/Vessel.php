@@ -1,15 +1,14 @@
 <?php
 
-namespace Human\Body\Channel;
+namespace Human\Body\System\Circulatory;
 
 use Human\Body\ChannelInterface;
-use Human\Body\Fluid\Blood;
 use Human\Body\FluidInterface;
 
 class Vessel implements ChannelInterface
 {
     private int $capacity;
-    private ?FluidInterface $fluid;
+    private ?FluidInterface $fluid = null;
 
     public function __construct(int $capacity = 0)
     {
@@ -40,5 +39,16 @@ class Vessel implements ChannelInterface
         }
 
         return $extractedFluid;
+    }
+
+    public function pump(?FluidInterface $fluid): void
+    {
+        if ($this->fluid === null) {
+            $this->fluid = $fluid;
+
+            return;
+        }
+
+        $this->fluid->add($fluid);
     }
 }
